@@ -1,5 +1,5 @@
 * {
-    outline: 1px solid black;
+    /*outline: 1px solid black;*/
     box-sizing: border-box;
 }
 
@@ -13,5 +13,13 @@
 
 .column {
     display: flex;
+    flex-direction: column;
     flex: 1;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: 1px solid saddlebrown;
 }
