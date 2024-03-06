@@ -2,6 +2,9 @@ const board = document.querySelector(".sketchboard");
 const gridChoice = document.querySelector("#grid");
 const gridbtn = document.getElementById("gridbtn");
 const gridInput = document.querySelector(".gridinput");
+const error = document.createElement('div');
+const colorBtn = document.querySelector("#choose");
+const eraserBtn = document.querySelector("#eraser");
 let mousePressed = false;
 
 document.addEventListener("mousedown", () => mousePressed = true);
@@ -18,16 +21,13 @@ function makeGrid(cells) {
            const row = document.createElement('div');
            row.classList.add('row');
            column.appendChild(row);
-           row.addEventListener('mouseover', () => {
-           if (mousePressed){
-            row.setAttribute('style', 'background-color: black;');
-           } 
-        });
+           changeBackgroundColor(row);
            //row.addEventListener('mouseout', () => row.setAttribute('style', 'background-color: none;'))
         }
     }
 }
-const error = document.createElement('div');
+
+
 gridbtn.addEventListener('click', (e) => {
     error.classList.add('error');
     gridInput.appendChild(error);
@@ -40,6 +40,18 @@ gridbtn.addEventListener('click', (e) => {
     }
 });
 
-/*function changeBackgroundColor(cell) {
-    this.setAttribute('style', 'background-color: black;');
-}*/
+function changeBackgroundColor(row) {
+    row.addEventListener('mouseover', () => {
+        if (mousePressed){
+            row.setAttribute('style', 'background-color: black;');
+        } 
+    });
+}
+
+function eraser(row) {
+    row.addEventListener('mouseover', () => {
+        if (mousePressed){
+            row.setAttribute('style', 'background-color: black;')
+        }
+    }) 
+}
