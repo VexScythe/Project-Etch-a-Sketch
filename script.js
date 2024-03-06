@@ -23,8 +23,6 @@ function makeGrid(cells) {
             row.setAttribute('style', 'background-color: black;');
            } 
         });
-       
-           
            //row.addEventListener('mouseout', () => row.setAttribute('style', 'background-color: none;'))
         }
     }
