@@ -23,3 +23,19 @@
     flex: 1;
     border: 1px solid saddlebrown;
 }
+
+#grid {
+    all:unset;
+    border: 1px solid black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
