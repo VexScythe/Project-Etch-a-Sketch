@@ -6,6 +6,8 @@ const error = document.createElement('div');
 const colorBtn = document.querySelector("#choose");
 const eraserBtn = document.querySelector("#eraser");
 const randomBtn = document.querySelector("#random");
+const shadeBtn = document.querySelector("#shade");
+
 let mousePressed = false,
     buttonMode = "";
 
@@ -14,14 +16,19 @@ colorBtn.addEventListener("click", () => {
     console.log('colormode');
     updateButtonState();
 });
-eraserBtn.addEventListener("click", ()=> {
+eraserBtn.addEventListener("click", () => {
     buttonMode = "eraser";
     console.log('erasermode');
     updateButtonState();
 });
-randomBtn.addEventListener("click", ()=> {
+randomBtn.addEventListener("click", () => {
     buttonMode = "random";
     console.log('randommode');
+    updateButtonState();
+});
+shadeBtn.addEventListener("click", () => {
+    buttonMode = "shade";
+    console.log('shademode');
     updateButtonState();
 });
 
@@ -80,6 +87,19 @@ function randomColor(row) {
     })
 }
 
+function shadeMode(row) {
+    let shade = 0.1;
+    row.forEach((row) => {
+        row.addEventListener('mouseover', () => {
+            if (mousePressed){
+                shade = Math.min(shade + 0.1, 1);
+                //shade += 0.1; 
+                row.setAttribute('style', `background-color: rgba(0, 0, 0, ${shade});`);
+            }
+        }); 
+    }); 
+}
+
 function gridStatus() {
     updateButtonState();
     gridbtn.addEventListener('click', () => {
@@ -107,6 +127,9 @@ function updateButtonState() {
             break;
         case "random":
             randomColor(board.querySelectorAll('.row'));
+            break;
+        case "shade":
+            shadeMode(board.querySelectorAll('.row'));
     }
 }
 
