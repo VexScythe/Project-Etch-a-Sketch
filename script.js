@@ -107,7 +107,7 @@ function randomColor(row) {
     })
 }
 
-function shadeMode(row) {
+/*function shadeMode(row) {
     let shade = 0.1;
     row.forEach((row) => {
         row.addEventListener('mouseover', () => {
@@ -117,6 +117,20 @@ function shadeMode(row) {
             }
         }); 
     }); 
+}*/
+
+function shadeMode(row) {
+    row.forEach(row => {
+        let shadeCounter = 0;
+        row.addEventListener('mouseover', () => {
+            if (mousePressed) {
+                shadeCounter++;
+                let opacity = shadeCounter / 10;
+                row.setAttribute('style', `background-color: rgba(0, 0, 0, ${opacity});`);
+                //row.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+            }
+        });
+    });
 }
 
 function toggleGrid(row) {
