@@ -4,6 +4,7 @@ const gridbtn = document.getElementById("gridbtn");
 const gridInput = document.querySelector(".gridinput");
 const error = document.createElement('div');
 const colorBtn = document.querySelector("#choose");
+const colorPicker = document.querySelector("#colorPicker");
 const eraserBtn = document.querySelector("#eraser");
 const randomBtn = document.querySelector("#random");
 const shadeBtn = document.querySelector("#shade");
@@ -17,6 +18,7 @@ let mousePressed = false,
 colorBtn.addEventListener("click", () => {
     buttonMode = "color";
     console.log('colormode');
+    colorPicker.click();
     updateButtonState();
 });
 
@@ -74,11 +76,11 @@ function makeGrid(cells) {
     return board;
 }
 
-function drawChooseColor(row) {
+function drawChooseColor(row, color) {
     row.forEach(row => {
         row.addEventListener('mouseover', () => {
             if (mousePressed){
-                row.setAttribute('style', 'background-color: black;');
+                row.setAttribute('style', `background-color: ${color};`);
             }
         });
     });
@@ -107,18 +109,6 @@ function randomColor(row) {
     })
 }
 
-/*function shadeMode(row) {
-    let shade = 0.1;
-    row.forEach((row) => {
-        row.addEventListener('mouseover', () => {
-            if (mousePressed){
-                shade = Math.min(shade + 0.1, 1);
-                row.setAttribute('style', `background-color: rgba(0, 0, 0, ${shade});`);
-            }
-        }); 
-    }); 
-}*/
-
 function shadeMode(row) {
     row.forEach(row => {
         let shadeCounter = 0;
@@ -127,7 +117,6 @@ function shadeMode(row) {
                 shadeCounter++;
                 let opacity = shadeCounter / 10;
                 row.setAttribute('style', `background-color: rgba(0, 0, 0, ${opacity});`);
-                //row.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
             }
         });
     });
@@ -169,7 +158,10 @@ function updateButtonState() {
     //eraserBtn.classList.toggle("active", eraserClicked);
     switch(buttonMode){
         case "color":
-            drawChooseColor(board.querySelectorAll('.row'));
+            colorPicker.addEventListener("input", () => {
+                const color = colorPicker.value;
+                drawChooseColor(board.querySelectorAll('.row'), color);
+            });
             break;
         case "eraser":
             eraser(board.querySelectorAll('.row'));
