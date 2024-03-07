@@ -7,8 +7,11 @@ const colorBtn = document.querySelector("#choose");
 const eraserBtn = document.querySelector("#eraser");
 const randomBtn = document.querySelector("#random");
 const shadeBtn = document.querySelector("#shade");
+const gridBtn = document.querySelector("#showgrid");
+const clearBtn = document.querySelector("#blank");
 
 let mousePressed = false,
+    gridToggled = false,
     buttonMode = "";
 
 colorBtn.addEventListener("click", () => {
@@ -16,22 +19,38 @@ colorBtn.addEventListener("click", () => {
     console.log('colormode');
     updateButtonState();
 });
+
 eraserBtn.addEventListener("click", () => {
     buttonMode = "eraser";
     console.log('erasermode');
     updateButtonState();
 });
+
 randomBtn.addEventListener("click", () => {
     buttonMode = "random";
     console.log('randommode');
     updateButtonState();
 });
+
 shadeBtn.addEventListener("click", () => {
     buttonMode = "shade";
     console.log('shademode');
     updateButtonState();
 });
 
+gridBtn.addEventListener("click", () => {
+    gridToggled = gridToggled ? false : true;
+    console.log(gridToggled);
+    buttonMode = "togglegrid";
+    console.log('togglegrid');
+    updateButtonState();
+});
+
+clearBtn.addEventListener("click", () => {
+    buttonMode = "clear";
+    console.log('sketch cleared');
+    updateButtonState();
+});
 
 
 document.addEventListener("mousedown", () => mousePressed = true);
@@ -47,6 +66,7 @@ function makeGrid(cells) {
         for(let j=0; j<cells; j++){
            const row = document.createElement('div');
            row.classList.add('row');
+           row.classList.add('gridvisible');
            column.appendChild(row);
         }
     }
@@ -93,10 +113,25 @@ function shadeMode(row) {
         row.addEventListener('mouseover', () => {
             if (mousePressed){
                 shade = Math.min(shade + 0.1, 1);
-                //shade += 0.1; 
                 row.setAttribute('style', `background-color: rgba(0, 0, 0, ${shade});`);
             }
         }); 
+    }); 
+}
+
+function toggleGrid(row) {
+    row.forEach((row) => {
+        if (gridToggled) {
+            row.classList.remove('gridvisible'); 
+        } else {
+            row.classList.add('gridvisible'); 
+        }
+    });    
+}
+
+function clearSketch(row) {
+    row.forEach((row) => {
+        row.setAttribute('style', 'background-color: white;');
     }); 
 }
 
@@ -130,6 +165,13 @@ function updateButtonState() {
             break;
         case "shade":
             shadeMode(board.querySelectorAll('.row'));
+            break;
+        case "togglegrid":
+            toggleGrid(board.querySelectorAll('.row'));
+            break;
+        case "clear":
+            clearSketch(board.querySelectorAll('.row'));
+            break;
     }
 }
 
