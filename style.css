@@ -5,18 +5,64 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Rockwell Extra Bold,Rockwell Bold,monospace;
 }
 
 body {
     background-image: url('./image/tilesetOpenGameBackground.png');
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(28, 28, 71);
+    margin: 25px auto;
+}
+
+.options {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.button {
+    margin-left: 20px;
+    box-shadow: 4px 4px rgba(0, 170, 255, 0.034);
+    border-radius: 6px;
+    border: 2px solid rgb(28, 28, 71);
+    transition: all 100ms ease-in;
+}
+
+.button:hover{
+    cursor:pointer;
+    scale: 1.1;
+    border: 2px solid rgb(94, 94, 145);
+}
+
+.container {
+    background-color: transparent;
 }
 
 .sketchboard {
     display: flex;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     background-color: rgb(255, 255, 255);
     flex-wrap: wrap;
     border: 2px solid whitesmoke;
@@ -40,8 +86,17 @@ body {
     border: 1px solid whitesmoke;
 }
 
+.gridinput {
+    width: 500px;
+    display: flex;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 #grid {
     all:unset;
+    background-color: whitesmoke;
     border: 1px solid black;
 }
 
