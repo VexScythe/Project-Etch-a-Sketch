@@ -115,6 +115,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.attive {
-    background-color: rgb(94, 144, 144);
+.active {
+    background-color: rgb(86, 161, 201);
 }

@@ -10,10 +10,20 @@ const randomBtn = document.querySelector("#random");
 const shadeBtn = document.querySelector("#shade");
 const gridBtn = document.querySelector("#showgrid");
 const clearBtn = document.querySelector("#blank");
+const buttons = document.querySelectorAll('.toactive');
 
 let mousePressed = false,
     gridToggled = false,
     buttonMode = "";
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+         buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+    });
+});
 
 colorBtn.addEventListener("click", () => {
     buttonMode = "color";
@@ -42,6 +52,7 @@ shadeBtn.addEventListener("click", () => {
 
 gridBtn.addEventListener("click", () => {
     gridToggled = gridToggled ? false : true;
+    gridToggled ? gridBtn.classList.add('active') : gridBtn.classList.remove('active');
     console.log(gridToggled);
     buttonMode = "togglegrid";
     console.log('togglegrid');
@@ -49,9 +60,12 @@ gridBtn.addEventListener("click", () => {
 });
 
 clearBtn.addEventListener("click", () => {
-    buttonMode = "clear";
-    console.log('sketch cleared');
-    updateButtonState();
+    const confirmed = confirm("This is going to clear all the Sketch Board. Are you sure?");
+    if (confirmed) {
+        buttonMode = "clear";
+        console.log('sketch cleared');
+        updateButtonState();
+    }
 });
 
 
